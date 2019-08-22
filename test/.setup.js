@@ -16,6 +16,12 @@ Object.keys(document.defaultView).forEach((property) => {
     global[property] = document.defaultView[property];
   }
 });
+global.HTMLElement = window.HTMLElement;
+global.Element = window.Element;
+global.Event = window.Event;
+window.performance = {};
+window.performance.navigation = {};
+window.performance.navigation.type = {};
 
 global.navigator = {
   userAgent: 'node.js'
