@@ -167,8 +167,13 @@ class TableauReport extends React.Component {
       ...this.props.options,
       onFirstInteractive: () => {
         this.workbook = this.viz.getWorkbook();
-        this.sheets = this.workbook.getActiveSheet().getWorksheets();
-        this.sheet = this.sheets[0];
+        this.sheet = this.workbook.getActiveSheet();
+        if (this.sheet.getSheetType() === 'dashboard') {
+          this.sheets = this.sheet.getWorksheets();
+          this.sheet = this.sheets[0];
+        } else {
+          this.sheets = [this.sheet];
+        }
 
         this.props.onLoad && this.props.onLoad(new Date());
       }
